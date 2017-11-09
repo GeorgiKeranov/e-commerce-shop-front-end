@@ -1,0 +1,28 @@
+.input-group-addon
+{
+    background-color:#FFF;
+}
+
+.img-responsive
+{
+    max-width: 80%;
+    max-height: 80%;
+
+    border: 2px solid;
+    border-radius: 16px;
+
+    margin: 0 auto;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.error {
+    background-color: pink;
+    color: red;
+}

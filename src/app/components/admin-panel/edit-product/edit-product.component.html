@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row well">
+        <form [formGroup]="productForm" (submit)="onProductSubmit()">
+
+            <div class="col-md-6">
+                <div class="row">
+                    <img *ngIf="imageFakeUrl !== undefined" class="img-responsive" [src]="imageFakeUrl">
+                    <img *ngIf="imageFakeUrl == undefined" class="img-responsive" src="//localhost:8080/res/images/default-image.png">
+                </div>
+
+                <div class="row top-buffer text-center">
+                    <label class="btn btn-primary">Browse image 
+                        <input type="file" (change)="generateImageUrl($event)" hidden>
+                    </label>
+
+                    <!-- Fix this!
+                    <button *ngIf="imageFakeUrl !== undefined" class="btn btn-danger" (click)="deleteImageUrl()">
+                        Delete image
+                    </button>
+                    -->
+                </div>
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    <label>Title</label>
+                    <input formControlName="title" class="form-control" type="text" placeholder="Enter title here" />
+                </div>
+
+                <div class="form-group">
+                    <label>Select categorie</label>
+                    <select class="form-control selectpicker" (change)="onCategorySelected($event.target.value)">
+                        <option value=-1 selected>Select the category</option>
+                        <option *ngFor="let category of categories" [value]="category.id" [selected]="categorySelected == category.id">
+                            {{ category.categoryName }}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea formControlName="description" rows="3" class="form-control" name="description" placeholder="Enter Description here"></textarea>
+                </div>
+
+                <div class="form-group col-md-4 col-md-offset-4">
+                    <label>Price</label>
+                    <div class="input-group">
+                        <input formControlName="price" class="form-control text-center" type="text" placeholder="PRICE">
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-usd"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-warning btn-block">Save the product</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

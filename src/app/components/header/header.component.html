@@ -1,0 +1,37 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+
+        <a class="navbar-brand" routerLink="/">E Shop</a>
+
+        <div class="collapse navbar-collapse">
+
+            <app-search></app-search>
+
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a routerLink="/catalog">Catalog</a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a routerLink="/contacts">Contacts</a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{ routeStartWith: 'admin' }">
+                        <a *ngIf="authService.loggedIn() && isAuthenticatedUserAdmin()" routerLink="/admin">Admin Panel</a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a *ngIf="authService.loggedIn()" routerLink="/account">My profile</a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a *ngIf="authService.loggedIn()" (click)="onLogout()">Logout</a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a *ngIf="!authService.loggedIn()" routerLink="/register">Register</a>
+                    </li>
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a *ngIf="!authService.loggedIn()" routerLink="/login">Login</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
