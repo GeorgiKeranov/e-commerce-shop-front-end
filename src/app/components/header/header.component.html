@@ -7,6 +7,18 @@
 
             <app-search></app-search>
 
+            <div class="navbar-left">
+                <ul class="nav navbar-nav">
+                    <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+                        <a *ngIf="authService.loggedIn()" routerLink="/shopping-cart">
+                            <span class="fa fa-2x fa-shopping-cart text-info"></span>
+                            <span class="badge have-items" *ngIf="getProductsCount() > 0">{{ getProductsCount() }}</span>
+                            <span class="badge" *ngIf="!getProductsCount() || getProductsCount() == 0">0</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="navbar-right">
                 <ul class="nav navbar-nav">
                     <li [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">

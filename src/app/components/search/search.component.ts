@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { ProductService } from '../../services/product/product.service';
+import { CategoryService } from '../../services/category/category.service';
 import { Category } from '../../objects/category';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  providers: [ProductService]
+  providers: [CategoryService]
 })
 export class SearchComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class SearchComponent implements OnInit {
   private categoryIdToSearch: number = -1;
 
   constructor(
-    private productService: ProductService,
+    private categoryService: CategoryService,
     private formBuilder: FormBuilder
   ) {
     this.searchForm = this.formBuilder.group({
@@ -27,7 +27,7 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productService.getCategories()
+    this.categoryService.getCategories()
       .then(categories => this.categories = categories);
   }
 

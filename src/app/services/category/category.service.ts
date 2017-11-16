@@ -18,15 +18,21 @@ export class CategoryService {
         private authService: AuthenticationService
     ) { }
 
+    getCategoryById(categoryId: number): Promise<Category> {
+        return this.http.get(getCategoriesUrl + '/' + categoryId).toPromise()
+            .then(resp => resp.json() as Category);
+    }
+
     getCategories(): Promise<Category[]> {
-        return this.http.get(getCategoriesUrl).toPromise()
-            .then(resp => resp.json() as Category[]);
+        return this.http.get(getCategoriesUrl)
+            .toPromise()
+            .then((response: Response) => response.json() as Category[]);
     }
 
     createCategory(categoryName: string): Promise<Message> {
 
         const params = {
-            categoryName: categoryName
+            'categoryName': categoryName
         };
 
         return this.http.post(createCategoryUrl, params, this.authService.getRequestOptions())

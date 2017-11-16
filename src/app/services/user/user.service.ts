@@ -86,5 +86,6 @@ export class UserService {
     localStorage.removeItem('lastName');
     localStorage.removeItem('phone');
     localStorage.removeItem('role');
+    localStorage.removeItem('shoppingCartCount');
   }
 }

@@ -14,6 +14,10 @@ import { CreateProductComponent } from './components/admin-panel/create-product/
 import { EditProductsComponent } from './components/admin-panel/edit-products/edit-products.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { EditProductComponent } from './components/admin-panel/edit-product/edit-product.component';
+import { CreateCategoryComponent } from './components/admin-panel/create-category/create-category.component';
+import { EditCategoryComponent } from './components/admin-panel/edit-category/edit-category.component';
+import { EditCategoriesComponent } from './components/admin-panel/edit-categories/edit-categories.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -22,11 +26,15 @@ const routes: Routes = [
     { path: 'account', component: AccountComponent, canActivate: [AuthenticatedGuard] },
     {
         path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard], children: [
-            { path: 'product/create', component: CreateProductComponent },
-            { path: 'product/edit', component: EditProductsComponent },
-            { path: 'product/edit/:id', component: EditProductComponent }
+            { path: 'products/create', component: CreateProductComponent },
+            { path: 'products/edit', component: EditProductsComponent },
+            { path: 'products/edit/:id', component: EditProductComponent },
+            { path: 'categories/create', component: CreateCategoryComponent },
+            { path: 'categories/edit', component: EditCategoriesComponent },
+            { path: 'categories/edit/:id', component: EditCategoryComponent }
         ]
     },
+    { path: 'shopping-cart', component: ShoppingCartComponent },
     { path: 'page-not-found', component: PageNotFoundComponent },
     { path: '**', component: PageNotFoundComponent }
 ];

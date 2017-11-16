@@ -4,27 +4,32 @@
         <div class="col-md-12">
 
             <div *ngFor="let product of products" class="col-sm-6 col-md-4">
-                <div class="thumbnail">
+                <div class="thumbnail photo">
 
                     <img [src]="productService.getImageUrl(product.mainImageName)" class="img-responsive">
                     <div class="caption">
                         <div class="row">
                             <div class="col-md-6 col-xs-6">
-                                <h3>{{ product.title }}</h3>
+                                <h4>{{ getSummaryTitle(product.title) }}</h4>
                             </div>
                             <div class="col-md-6 col-xs-6 price">
                                 <h3>
                                     <label>${{ product.price }}</label></h3>
                             </div>
                         </div>
-                        <p>{{ product.description }}</p>
+                        <p>{{ getSummaryDescription(product.description) }}</p>
                         <div class="row">
                             <div class="col-md-6">
 
                                 <button class="btn btn-primary btn-product"><span class="glyphicon glyphicon-list-alt"></span> Details</button>
                             </div>
                             <div class="col-md-6">
-                                <a class="btn btn-success btn-product"><span class="glyphicon glyphicon-shopping-cart"></span> Add to cart</a></div>
+                                <!-- Add option for quantity -->
+                                <a class="btn btn-success btn-product" (click)="addToCart(product.id)">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    Add to cart
+                                </a>
+                            </div>
                         </div>
 
                         <p> </p>

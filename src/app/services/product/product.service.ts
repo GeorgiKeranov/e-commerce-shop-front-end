@@ -4,13 +4,14 @@ import 'rxjs/add/operator/toPromise';
 
 import { AuthenticationService } from '../authentication.service';
 import { Message } from '../../objects/message';
-import { Category } from '../../objects/category';
 import { Product } from '../../objects/product';
+import { OrderItem } from '../../objects/order-item';
 
-const categoriesUrl = 'http://localhost:8080/categories';
-const productsUrl = 'http://localhost:8080/products';
-const saveProductUrl = 'http://localhost:8080/admin/products/create';
-const updateProductUrl = 'http://localhost:8080/admin/products/update';
+const hostUrl = 'http://localhost:8080';
+
+const productsUrl = hostUrl + '/products';
+const saveProductUrl = hostUrl + '/admin/products/create';
+const updateProductUrl = hostUrl + '/admin/products/update';
 
 @Injectable()
 export class ProductService {
@@ -19,12 +20,6 @@ export class ProductService {
         private http: Http,
         private authService: AuthenticationService
     ) { }
-
-    getCategories(): Promise<Category[]> {
-        return this.http.get(categoriesUrl)
-            .toPromise()
-            .then((response: Response) => response.json() as Category[]);
-    }
 
     getProducts(): Promise<Product[]> {
         return this.http.get(productsUrl)

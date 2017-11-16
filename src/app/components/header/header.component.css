@@ -1,0 +1,15 @@
+.badge {
+    padding-left: 9px;
+    padding-right: 9px;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    font-size: 14px;
+    padding: 0 5px;
+    vertical-align: top;
+}
+
+.have-items {
+    color: white;
+    background: #FF5722;
+}

@@ -44,7 +44,7 @@ export class AuthenticationService {
     getRequestOptions() {
         return new RequestOptions({
             headers: new Headers({
-                'Content-Type': 'applications/json',
+                'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + localStorage.getItem('token')
             })
         });

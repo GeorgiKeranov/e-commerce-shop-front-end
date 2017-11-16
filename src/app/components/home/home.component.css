@@ -1,3 +1,11 @@
 .btn-product {
     width: 100%;
 }
+
+.photo {
+    text-align: center;
+}
+
+.img-responsive {
+    height: 200px;
+}

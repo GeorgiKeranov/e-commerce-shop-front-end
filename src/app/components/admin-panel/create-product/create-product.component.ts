@@ -4,6 +4,7 @@ import { FlashMessagesService } from 'angular2-flash-messages';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ProductService } from '../../../services/product/product.service';
+import { CategoryService } from '../../../services/category/category.service';
 import { Category } from '../../../objects/category';
 import { Message } from '../../../objects/message';
 
@@ -11,7 +12,7 @@ import { Message } from '../../../objects/message';
   selector: 'app-create-product',
   templateUrl: './create-product.component.html',
   styleUrls: ['./create-product.component.css'],
-  providers: [ProductService]
+  providers: [ProductService, CategoryService]
 })
 export class CreateProductComponent implements OnInit {
 
@@ -30,6 +31,7 @@ export class CreateProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private categoryService: CategoryService,
     private router: Router,
     private flashMessageService: FlashMessagesService
   ) {
@@ -45,7 +47,7 @@ export class CreateProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.productService.getCategories()
+    this.categoryService.getCategories()
       .then(categories => this.categories = categories);
   }
 

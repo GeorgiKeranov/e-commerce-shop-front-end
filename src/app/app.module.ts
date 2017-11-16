@@ -27,6 +27,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { EditProductComponent } from './components/admin-panel/edit-product/edit-product.component';
 import { CreateCategoryComponent } from './components/admin-panel/create-category/create-category.component';
 import { EditCategoryComponent } from './components/admin-panel/edit-category/edit-category.component';
+import { EditCategoriesComponent } from './components/admin-panel/edit-categories/edit-categories.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { EditCategoryComponent } from './components/admin-panel/edit-category/ed
     PageNotFoundComponent,
     EditProductComponent,
     CreateCategoryComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    EditCategoriesComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

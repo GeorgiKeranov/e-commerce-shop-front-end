@@ -5,13 +5,14 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Product } from '../../../objects/product';
 import { Category } from '../../../objects/category';
 import { ProductService } from '../../../services/product/product.service';
+import { CategoryService } from '../../../services/category/category.service';
 import { Message } from '../../../objects/message';
 
 @Component({
   selector: 'app-edit-products',
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.css'],
-  providers: [ProductService]
+  providers: [ProductService, CategoryService]
 })
 export class EditProductComponent implements OnInit {
 
@@ -33,7 +34,8 @@ export class EditProductComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private productService: ProductService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private categoryService: CategoryService
   ) {
 
     this.productForm = this.formBuilder.group({
@@ -72,7 +74,7 @@ export class EditProductComponent implements OnInit {
       }
     });
 
-    this.productService.getCategories()
+    this.categoryService.getCategories()
       .then(categories => this.categories = categories);
   }
 
@@ -126,7 +128,7 @@ export class EditProductComponent implements OnInit {
     this.productService.updateProduct(formData)
       .then((msg: Message) => {
         console.log(msg);
-        this.router.navigate(['/admin/product/edit']);
+        this.router.navigate(['/admin/products/edit']);
       })
       .catch(err => {
         this.errMessage = err.json() as Message;

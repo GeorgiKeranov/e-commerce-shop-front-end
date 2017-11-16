@@ -39,4 +39,7 @@ export class HeaderComponent implements OnInit {
         }
     }
 
+    getProductsCount(): string {
+        return localStorage.getItem('shoppingCartCount');
+    }
 }

@@ -5,12 +5,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { UserService } from '../../services/user/user.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
+import { OrderService } from '../../services/order/order.service';
 
 @Component({
     selector: 'app-login',
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css'],
-    providers: [UserService]
+    providers: [UserService, OrderService]
 })
 export class LoginComponent {
 
@@ -20,7 +21,8 @@ export class LoginComponent {
         private userService: UserService,
         private formBuilder: FormBuilder,
         private flashMessagesService: FlashMessagesService,
-        private router: Router
+        private router: Router,
+        private orderService: OrderService
     ) {
         // Creating the login form.
         this.loginForm = this.formBuilder.group({
@@ -35,6 +37,19 @@ export class LoginComponent {
 
         this.userService.login(username, password)
             .then(() => {
+
+                // Get count of the products in the shopping cart.
+                this.orderService.getCartProductsCount()
+                    .then(resp => {
+                        resp = resp.json();
+
+                        const cartProductsCount = resp['count'];
+                        if (cartProductsCount !== undefined) {
+                            localStorage.setItem('shoppingCartCount', '' + cartProductsCount);
+                        }
+                    })
+                    .catch(err => console.log(err));
+
                 this.flashMessagesService.show('You are logged in!', { cssClass: 'alert-success' });
                 this.router.navigate(['/']);
             })

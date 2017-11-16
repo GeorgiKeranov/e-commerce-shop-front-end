@@ -1,0 +1,99 @@
+<div class="container">
+  <div class="row">
+    <div class="panel panel-info">
+
+      <!-- Panel Heading -->
+      <div class="panel-heading">
+        <div class="panel-title">
+          <div class="row">
+            <div class="col-xs-6">
+              <h5><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</h5>
+            </div>
+            <div class="col-xs-6">
+              <a class="btn btn-primary btn-sm btn-block" routerLink="/">
+									<span class="glyphicon glyphicon-share-alt"></span> Continue shopping
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Panel Body -->
+      <div class="panel-body">
+
+        <!-- Table colums -->
+        <div class="row text-center">
+          <div class="col-xs-5">
+            <b>Product</b>
+          </div>
+          <div class="col-xs-2">
+            <b>Quantity</b>
+          </div>
+          <div class="col-xs-2">
+            <b>Price</b>
+          </div>
+          <div class="col-xs-2">
+            <b>Total</b>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Table rows -->
+        <div *ngFor="let orderItem of orderItems; let i = index">
+          <div class="row text-center">
+            <div class="col-xs-2">
+              <img class="img-responsive" [src]="productService.getImageUrl(orderItem.product.mainImageName)">
+            </div>
+            <div class="col-xs-3">
+              <h4 class="product-name"><strong>{{ orderItem.product.title }}</strong></h4>
+              <h4><small>{{ orderItem.product.description }}</small></h4>
+            </div>
+            <div class="col-xs-2">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button type="button" class="quantity-left-minus btn btn-danger btn-number" (click)="minusOneQuantity(orderItem)">
+                    <span class="glyphicon glyphicon-minus"></span>
+                </button>
+                </span>
+                <div class="form-control input-number"> {{ orderItem.quantity }}</div>
+                <span class="input-group-btn">
+                  <button type="button" class="quantity-right-plus btn btn-success btn-number" (click)="plusOneQuantity(orderItem)">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </button>
+                </span>
+              </div>
+            </div>
+            <div class="col-xs-2">
+              {{ orderItem.product.price }} <b>$</b>
+            </div>
+            <div class="col-xs-2">
+              {{ orderItem.product.price * orderItem.quantity }} <b>$</b>
+            </div>
+            <div class="col-xs-1">
+              <button type="button" class="btn btn-danger" (click)="removeItemFromCart(i)">
+									<span class="glyphicon glyphicon-trash"> </span>
+								</button>
+            </div>
+          </div>
+          <hr>
+        </div>
+
+      </div>
+
+      <!-- Panel Footer -->
+      <div class="panel-footer">
+        <div class="row text-center">
+          <div class="col-xs-9">
+            <h4 class="text-right">Total Price: <strong>{{ getTotalPrice() }} $</strong></h4>
+          </div>
+          <div class="col-xs-3">
+            <button type="button" class="btn btn-success btn-block" (click)="orderTheProducts()">
+								Order the products
+							</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
