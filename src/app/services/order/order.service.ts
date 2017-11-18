@@ -4,12 +4,14 @@ import { Http, Response } from '@angular/http';
 import { AuthenticationService } from '../authentication.service';
 import { Message } from '../../objects/message';
 import { OrderItem } from '../../objects/order-item';
+import { Order } from '../../objects/order';
 
 const hostUrl = 'http://localhost:8080';
 
 const orderItemsUrl = hostUrl + '/order/items';
 const getCartProductsCountUrl = hostUrl + '/order/items/count';
 const buyTheOrder = hostUrl + '/order/buy';
+const getOrdersWithStatusSentUrl = hostUrl + '/admin/orders';
 
 @Injectable()
 export class OrderService {
@@ -67,5 +69,10 @@ export class OrderService {
             {},
             this.authService.getRequestOptions()
         ).toPromise();
+    }
+
+    getOrdersWithStatusSent(): Promise<Order[]> {
+        return this.http.get(getOrdersWithStatusSentUrl, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as Order[]);
     }
 }

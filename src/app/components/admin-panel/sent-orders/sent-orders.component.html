@@ -1,0 +1,35 @@
+<div class="table-responsive">
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+
+        <th>ID</th>
+        <th>Customer fullname</th>
+        <th>Customer email</th>
+        <th>Price</th>
+        <th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let order of orders">
+
+        <td>{{ order.id }}</td>
+        <td>{{ order.fullName }}</td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.price }} $</td>
+        <td class="text-center">
+          <a class="btn btn-success" [routerLink]="order.id">
+            <span class="glyphicon glyphicon-ok"></span>
+            Complete
+          </a>
+          <a class="btn btn-danger" [routerLink]="order.id">
+            <span class="glyphicon glyphicon-remove"></span>
+            Delete
+          </a>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

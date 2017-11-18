@@ -18,6 +18,7 @@ import { CreateCategoryComponent } from './components/admin-panel/create-categor
 import { EditCategoryComponent } from './components/admin-panel/edit-category/edit-category.component';
 import { EditCategoriesComponent } from './components/admin-panel/edit-categories/edit-categories.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { SentOrdersComponent } from './components/admin-panel/sent-orders/sent-orders.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -31,7 +32,8 @@ const routes: Routes = [
             { path: 'products/edit/:id', component: EditProductComponent },
             { path: 'categories/create', component: CreateCategoryComponent },
             { path: 'categories/edit', component: EditCategoriesComponent },
-            { path: 'categories/edit/:id', component: EditCategoryComponent }
+            { path: 'categories/edit/:id', component: EditCategoryComponent },
+            { path: 'orders/sent', component: SentOrdersComponent }
         ]
     },
     { path: 'shopping-cart', component: ShoppingCartComponent },

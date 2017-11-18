@@ -29,6 +29,9 @@ import { CreateCategoryComponent } from './components/admin-panel/create-categor
 import { EditCategoryComponent } from './components/admin-panel/edit-category/edit-category.component';
 import { EditCategoriesComponent } from './components/admin-panel/edit-categories/edit-categories.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { SentOrdersComponent } from './components/admin-panel/sent-orders/sent-orders.component';
+import { CompleteOrderComponent } from './components/admin-panel/complete-order/complete-order.component';
+import { CompletedOrdersComponent } from './components/admin-panel/completed-orders/completed-orders.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +50,10 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     CreateCategoryComponent,
     EditCategoryComponent,
     EditCategoriesComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    SentOrdersComponent,
+    CompleteOrderComponent,
+    CompletedOrdersComponent
   ],
   imports: [
     BrowserModule,
