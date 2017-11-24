@@ -22,4 +22,10 @@ export class SentOrdersComponent implements OnInit {
       .then((orders: Order[]) => this.orders = orders);
   }
 
+  removeOrder(index: number) {
+
+    // Remove the orders from the back end.
+
+    this.orders.splice(index, 1);
+  }
 }

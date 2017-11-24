@@ -1,3 +1,39 @@
-<p>
-  completed-orders works!
-</p>
+<div class="page-header">
+  <h2>Completed Orders:</h2>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+
+        <th>ID</th>
+        <th>Customer fullname</th>
+        <th>Customer email</th>
+        <th>Price</th>
+        <th class="text-center"><span class="glyphicon glyphicon-cog"></span></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let order of orders; let i = index">
+
+        <td>{{ order.id }}</td>
+        <td>{{ order.fullName }}</td>
+        <td>{{ order.email }}</td>
+        <td>{{ order.price }} $</td>
+        <td class="text-center">
+          <a class="btn btn-warning" [routerLink]="order.id">
+            <span class="glyphicon glyphicon-edit"></span>
+            Move to sent orders
+          </a>
+          <a class="btn btn-danger" (click)="removeOrder(i)">
+            <span class="glyphicon glyphicon-remove"></span>
+            Delete
+          </a>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
+</div>

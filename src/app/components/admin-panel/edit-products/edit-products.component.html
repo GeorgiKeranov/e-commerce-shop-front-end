@@ -10,6 +10,7 @@
           </div>
         </div>
         <div class="panel-body">
+
           <table class="table table-striped table-bordered table-list">
             <thead>
               <tr>
@@ -20,13 +21,13 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let product of products">
+              <tr *ngFor="let product of products; let i = index">
                 <td align="center">
                   <div class="margin-top-bot-10px">
                     <a [routerLink]="product.id" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a>
                   </div>
                   <div class="margin-top-bot-10px">
-                    <a class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
+                    <a (click)="addProductToDeleted(i)" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a>
                   </div>
                 </td>
                 <td><img [src]="productService.getImageUrl(product.mainImageName)" class="img-responsive"></td>

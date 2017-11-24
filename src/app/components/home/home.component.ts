@@ -6,6 +6,7 @@ import { OrderService } from '../../services/order/order.service';
 import { Product } from '../../objects/product';
 import { Message } from '../../objects/message';
 import { AuthenticationService } from '../../services/authentication.service';
+import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
     selector: 'app-home',
@@ -21,7 +22,8 @@ export class HomeComponent implements OnInit {
         private productService: ProductService,
         private orderService: OrderService,
         private authService: AuthenticationService,
-        private router: Router
+        private router: Router,
+        private flashMessages: FlashMessagesService
     ) { }
 
     ngOnInit() {
@@ -30,16 +32,13 @@ export class HomeComponent implements OnInit {
     };
 
     getSummaryTitle(title: string): string {
-        return title.length > 20 ? title.substring(0, 20) + '...' : title;
-    }
-
-    getSummaryDescription(desc: string): string {
-        return desc.length > 50 ? desc.substring(0, 50) + '...' : desc;
+        return title.length > 12 ? title.substring(0, 12) + '...' : title;
     }
 
     addToCart(productId: number) {
 
         if (!this.authService.loggedIn()) {
+            this.flashMessages.show('You have to login first.', { cssClass: 'alert-warning' });
             this.router.navigate(['/login']);
         } else {
             this.orderService.addProductToCart(productId)
@@ -59,6 +58,10 @@ export class HomeComponent implements OnInit {
                 })
                 .catch(err => console.log(err));
         }
+    }
+
+    changeProductsList(products: Product[]) {
+        this.products = products;
     }
 
 }

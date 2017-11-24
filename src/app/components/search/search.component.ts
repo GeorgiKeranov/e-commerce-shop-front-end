@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { CategoryService } from '../../services/category/category.service';
+import { ProductService } from '../../services/product/product.service';
 import { Category } from '../../objects/category';
+import { Product } from '../../objects/product';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  providers: [CategoryService]
+  providers: [CategoryService, ProductService]
 })
 export class SearchComponent implements OnInit {
 
-  private searchForm: FormGroup;
+  @Output() productsChanged = new EventEmitter();
 
-  private categories: Category[];
-  private categoryIdToSearch: number = -1;
+  searchForm: FormGroup;
+
+  categories: Category[];
+  categoryIdToSearch: number = -1;
 
   constructor(
     private categoryService: CategoryService,
+    private productService: ProductService,
     private formBuilder: FormBuilder
   ) {
     this.searchForm = this.formBuilder.group({
@@ -33,7 +38,16 @@ export class SearchComponent implements OnInit {
 
   onChange(categoryId) {
     this.categoryIdToSearch = categoryId;
-    console.log(this.categoryIdToSearch);
+  }
+
+  onSearchSubmit() {
+    this.productService.search(
+      this.searchForm.get('keywords').value,
+      this.categoryIdToSearch
+    ).then((products: Product[]) => {
+      // Send the products to the parent component
+      this.productsChanged.emit(products);
+    });
   }
 
 }

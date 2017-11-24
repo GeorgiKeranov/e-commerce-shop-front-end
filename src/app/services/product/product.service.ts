@@ -10,8 +10,10 @@ import { OrderItem } from '../../objects/order-item';
 const hostUrl = 'http://localhost:8080';
 
 const productsUrl = hostUrl + '/products';
-const saveProductUrl = hostUrl + '/admin/products/create';
-const updateProductUrl = hostUrl + '/admin/products/update';
+const adminProductsUrl = hostUrl + '/admin/products/';
+const saveProductUrl = adminProductsUrl + 'create';
+const updateProductUrl = adminProductsUrl + 'update';
+
 
 @Injectable()
 export class ProductService {
@@ -55,4 +57,13 @@ export class ProductService {
             .then(resp => resp.json() as Product);
     }
 
+    deleteProductById(productId: number) {
+        return this.http.delete(adminProductsUrl + productId, this.authService.getRequestOptions())
+            .toPromise();
+    }
+
+    search(keyword: string, categoryId: number): Promise<Product[]> {
+        return this.http.get(productsUrl + '?searchWord=' + keyword + '&categoryId=' + categoryId, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as Product[]);
+    }
 }

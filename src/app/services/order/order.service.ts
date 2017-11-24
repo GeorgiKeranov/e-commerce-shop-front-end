@@ -5,13 +5,18 @@ import { AuthenticationService } from '../authentication.service';
 import { Message } from '../../objects/message';
 import { OrderItem } from '../../objects/order-item';
 import { Order } from '../../objects/order';
+import { User } from '../../objects/user';
 
 const hostUrl = 'http://localhost:8080';
 
 const orderItemsUrl = hostUrl + '/order/items';
-const getCartProductsCountUrl = hostUrl + '/order/items/count';
 const buyTheOrder = hostUrl + '/order/buy';
-const getOrdersWithStatusSentUrl = hostUrl + '/admin/orders';
+const completeOrderUrl = hostUrl + '/admin/orders/complete/';
+
+const getOrderByIdUrl = hostUrl + '/admin/orders/';
+const getCartProductsCountUrl = hostUrl + '/order/items/count';
+const getOrdersWithStatusSentUrl = hostUrl + '/admin/orders?status=sent';
+const getOrdersWithStatusCompletedUrl = hostUrl + '/admin/orders?status=completed';
 
 @Injectable()
 export class OrderService {
@@ -74,5 +79,35 @@ export class OrderService {
     getOrdersWithStatusSent(): Promise<Order[]> {
         return this.http.get(getOrdersWithStatusSentUrl, this.authService.getRequestOptions())
             .toPromise().then(resp => resp.json() as Order[]);
+    }
+
+    completeTheOrder(orderId: number) {
+        return this.http.post(completeOrderUrl + orderId, {}, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as Message);
+    }
+
+    getOrderById(orderId: number): Promise<Order> {
+        return this.http.get(getOrderByIdUrl + orderId, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as Order);
+    }
+
+    getUserByOrderId(orderId: number): Promise<User> {
+        return this.http.get(getOrderByIdUrl + orderId + '/user', this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as User);
+    }
+
+    getOrderItemsByOrderId(orderId: number): Promise<OrderItem[]> {
+        return this.http.get(getOrderByIdUrl + orderId + '/items', this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as OrderItem[]);
+    }
+
+    getOrdersWithStatusCompleted(): Promise<Order[]> {
+        return this.http.get(getOrdersWithStatusCompletedUrl, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as Order[]);
+    }
+
+    updateOrderStatusToSent(orderId: number): Promise<Response> {
+        return this.http.put(completeOrderUrl + orderId, {}, this.authService.getRequestOptions())
+            .toPromise();
     }
 }

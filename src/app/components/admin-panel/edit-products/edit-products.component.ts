@@ -12,6 +12,7 @@ import { ProductService } from '../../../services/product/product.service';
 export class EditProductsComponent implements OnInit {
 
   products: Product[];
+  errorMessage: string;
 
   constructor(
     private productService: ProductService
@@ -26,4 +27,17 @@ export class EditProductsComponent implements OnInit {
     console.log(product);
   }
 
+  addProductToDeleted(index: number) {
+
+    // Deleting the product from the database.
+    this.productService.deleteProductById(this.products[index].id)
+      .then(() => {
+
+        // Deleting the object from array.
+        this.products.splice(index, 1);
+      })
+      .catch(() => {
+        this.errorMessage = 'This product can\'t be deleted because it is used in orders';
+      });
+  }
 }

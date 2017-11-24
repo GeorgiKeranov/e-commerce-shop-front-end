@@ -19,6 +19,9 @@ import { EditCategoryComponent } from './components/admin-panel/edit-category/ed
 import { EditCategoriesComponent } from './components/admin-panel/edit-categories/edit-categories.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { SentOrdersComponent } from './components/admin-panel/sent-orders/sent-orders.component';
+import { CompleteOrderComponent } from './components/admin-panel/complete-order/complete-order.component';
+import { CompletedOrdersComponent } from './components/admin-panel/completed-orders/completed-orders.component';
+import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-order/uncomplete-order.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -33,7 +36,10 @@ const routes: Routes = [
             { path: 'categories/create', component: CreateCategoryComponent },
             { path: 'categories/edit', component: EditCategoriesComponent },
             { path: 'categories/edit/:id', component: EditCategoryComponent },
-            { path: 'orders/sent', component: SentOrdersComponent }
+            { path: 'orders/sent', component: SentOrdersComponent },
+            { path: 'orders/sent/:id', component: CompleteOrderComponent },
+            { path: 'orders/completed', component: CompletedOrdersComponent },
+            { path: 'orders/completed/:id', component: UncompleteOrderComponent },
         ]
     },
     { path: 'shopping-cart', component: ShoppingCartComponent },

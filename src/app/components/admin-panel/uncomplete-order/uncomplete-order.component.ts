@@ -2,23 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { User } from '../../../objects/user';
-import { Order } from '../../../objects/order';
 import { OrderItem } from '../../../objects/order-item';
 import { OrderService } from '../../../services/order/order.service';
 import { ProductService } from '../../../services/product/product.service';
 
-
 @Component({
-  selector: 'app-complete-order',
-  templateUrl: './complete-order.component.html',
-  styleUrls: ['./complete-order.component.css'],
+  selector: 'app-uncomplete-order',
+  templateUrl: './uncomplete-order.component.html',
+  styleUrls: ['./uncomplete-order.component.css'],
   providers: [OrderService, ProductService]
 })
-export class CompleteOrderComponent implements OnInit {
+export class UncompleteOrderComponent implements OnInit {
 
   orderId: number;
-  customer: User;
   orderItems: OrderItem[];
+  customer: User;
 
   constructor(
     private orderService: OrderService,
@@ -38,6 +36,7 @@ export class CompleteOrderComponent implements OnInit {
       this.orderService.getOrderItemsByOrderId(this.orderId)
         .then((orderItems: OrderItem[]) => this.orderItems = orderItems);
     });
+
   }
 
   getTotalPrice() {
@@ -57,9 +56,11 @@ export class CompleteOrderComponent implements OnInit {
     return title.length > 20 ? title.substring(0, 20) + '...' : title;
   }
 
-  completeTheOrder() {
-    this.orderService.completeTheOrder(this.orderId)
-      .then(() => this.router.navigate(['/admin/orders/sent']));
+  changeOrderStatusToSent() {
+    this.orderService.updateOrderStatusToSent(this.orderId)
+      .then(resp => {
+        this.router.navigate(['/admin/orders/completed']);
+      });
   }
 
 }

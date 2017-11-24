@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+
 import { AppRoutingModule } from './app.routing.module';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { FlashMessagesModule } from 'angular2-flash-messages';
@@ -32,6 +33,7 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
 import { SentOrdersComponent } from './components/admin-panel/sent-orders/sent-orders.component';
 import { CompleteOrderComponent } from './components/admin-panel/complete-order/complete-order.component';
 import { CompletedOrdersComponent } from './components/admin-panel/completed-orders/completed-orders.component';
+import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-order/uncomplete-order.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { CompletedOrdersComponent } from './components/admin-panel/completed-ord
     ShoppingCartComponent,
     SentOrdersComponent,
     CompleteOrderComponent,
-    CompletedOrdersComponent
+    CompletedOrdersComponent,
+    UncompleteOrderComponent
   ],
   imports: [
     BrowserModule,
