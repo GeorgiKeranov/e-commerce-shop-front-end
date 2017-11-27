@@ -42,7 +42,63 @@ export class PagesComponent implements OnInit {
   }
 
   toPage(page: number) {
-    this.router.navigate([this.pathToNavigate], { queryParams: { page: page } });
+    this.router.navigate([this.pathToNavigate], { queryParams: this.getQueryParams(page) });
+  }
+
+  previousPage() {
+    this.router.navigate([this.pathToNavigate], { queryParams: this.getQueryParams(this.currentPage - 1) });
+  }
+
+  nextPage() {
+    this.router.navigate([this.pathToNavigate], { queryParams: this.getQueryParams(this.currentPage + 1) });
+  }
+
+  getQueryParams(page: number): object {
+    let params = {};
+
+    if (this._categoryId >= 0 && this._searchWord) {
+      params = {
+        categoryId: this._categoryId,
+        searchWord: this._searchWord,
+        page: page
+      };
+    }
+
+    if (!this._categoryId && this._searchWord) {
+      params = {
+        searchWord: this._searchWord,
+        page: page
+      };
+    }
+
+    if (this._categoryId >= 0 && !this._searchWord) {
+      params = {
+        categoryId: this._categoryId,
+        page: page
+      };
+    }
+
+    if (!this._categoryId && !this._searchWord) {
+      params = {
+        page: page
+      };
+    }
+
+    console.log(params);
+
+    return params;
+  }
+
+  previousStyle() {
+    if (this.currentPage === 1) {
+      return 'disabled';
+    }
+  }
+
+  nextStyle() {
+    if (this.currentPage === this.pagesCount) {
+      return 'disabled';
+    }
   }
 
 }

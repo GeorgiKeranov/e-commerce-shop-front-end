@@ -2,7 +2,13 @@
 
   <ul class="pagination">
 
-    <li class="disabled"><a>&laquo;</a></li>
+    <li *ngIf="currentPage === 1" class="disabled">
+      <a>&laquo;</a>
+    </li>
+
+    <li *ngIf="currentPage > 1" (click)="previousPage()">
+      <a>&laquo;</a>
+    </li>
 
     <li *ngIf="currentPage - 3 > 0">
       <a (click)="toPage(currentPage - 3)">{{ currentPage - 3 }}</a>
@@ -30,6 +36,12 @@
       <a (click)="toPage(currentPage + 3)">{{ currentPage + 3 }}</a>
     </li>
 
-    <li class="disabled"><a>&raquo;</a></li>
+    <li *ngIf="currentPage === pagesCount" class="disabled">
+      <a>&raquo;</a>
+    </li>
+
+    <li *ngIf="currentPage < pagesCount" (click)="nextPage()">
+      <a>&raquo;</a>
+    </li>
   </ul>
 </div>
