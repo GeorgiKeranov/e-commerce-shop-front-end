@@ -1,7 +1,7 @@
 <div class="container">
 
     <div class="row col-md-offset-4">
-        <app-search (productsChanged)="changeProductsList($event)"></app-search>
+        <app-search [pathToNavigate]="'/'"></app-search>
     </div>
     <hr>
 
@@ -42,8 +42,9 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
+
+        <app-pages [pathToNavigate]="'/'" [currentPage]="currentPage" [categoryId]="categoryId" [searchWord]="searchWord"></app-pages>
+
     </div>
 </div>

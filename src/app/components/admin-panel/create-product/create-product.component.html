@@ -9,8 +9,6 @@
         </div>
       </div>
 
-      <h1 *ngIf="processing">Processing</h1>
-
       <div class="col-md-6">
         <div class="row">
           <img *ngIf="imageFakeUrl !== undefined" class="img-responsive" [src]="imageFakeUrl">
@@ -61,7 +59,7 @@
         </div>
 
         <div class="form-group">
-          <input [disabled]="processing == true" type="submit" class="btn btn-warning btn-block" value="Save the product">
+          <input [disabled]="processing" type="submit" class="btn btn-warning btn-block" value="Save the product" disabled>
         </div>
 
 

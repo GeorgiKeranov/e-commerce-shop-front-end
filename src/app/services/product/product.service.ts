@@ -10,6 +10,7 @@ import { OrderItem } from '../../objects/order-item';
 const hostUrl = 'http://localhost:8080';
 
 const productsUrl = hostUrl + '/products';
+const productsCountUrl = productsUrl + '/count';
 const adminProductsUrl = hostUrl + '/admin/products/';
 const saveProductUrl = adminProductsUrl + 'create';
 const updateProductUrl = adminProductsUrl + 'update';
@@ -27,6 +28,33 @@ export class ProductService {
         return this.http.get(productsUrl)
             .toPromise()
             .then((response: Response) => response.json() as Product[]);
+    }
+
+    getProductsByParams(page: number, categoryId: number, searchWord: string): Promise<Product[]> {
+
+        // Checking if there are params and if they are we are adding ? to the url.
+        let url = (page >= 0 || categoryId || searchWord) ? productsUrl + '?' : productsUrl;
+
+        let moreThanOneParam = false;
+
+        if (page > 0) {
+            url += 'page=' + (page - 1);
+            moreThanOneParam = true;
+        }
+
+        if (categoryId !== undefined && categoryId !== -1) {
+            url += moreThanOneParam ? '&' : '';
+            url += 'categoryId=' + categoryId;
+            moreThanOneParam = true;
+        }
+
+        if (searchWord) {
+            url += moreThanOneParam ? '&' : '';
+            url += 'searchWord=' + searchWord;
+        }
+
+        return this.http.get(url, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json() as Product[]);
     }
 
     saveProduct(formData: FormData): Promise<Message> {
@@ -62,8 +90,23 @@ export class ProductService {
             .toPromise();
     }
 
-    search(keyword: string, categoryId: number): Promise<Product[]> {
-        return this.http.get(productsUrl + '?searchWord=' + keyword + '&categoryId=' + categoryId, this.authService.getRequestOptions())
-            .toPromise().then(resp => resp.json() as Product[]);
+    getProductsCountWithParams(categoryId: number, searchWord: string): Promise<JSON> {
+
+        // Checking if there are params and if they are we are adding ? to the url.
+        let url = (categoryId || searchWord) ? productsCountUrl + '?' : productsCountUrl;
+        let moreThanOneParam = false;
+
+        if (categoryId && categoryId !== -1) {
+            url += 'categoryId=' + categoryId;
+            moreThanOneParam = true;
+        }
+
+        if (searchWord) {
+            url += moreThanOneParam ? '&' : '';
+            url += 'searchWord=' + searchWord;
+        }
+
+        return this.http.get(url, this.authService.getRequestOptions())
+            .toPromise().then(resp => resp.json());
     }
 }

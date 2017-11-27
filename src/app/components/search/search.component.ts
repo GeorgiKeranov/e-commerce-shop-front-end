@@ -1,20 +1,19 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { CategoryService } from '../../services/category/category.service';
-import { ProductService } from '../../services/product/product.service';
 import { Category } from '../../objects/category';
-import { Product } from '../../objects/product';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
-  providers: [CategoryService, ProductService]
+  providers: [CategoryService]
 })
 export class SearchComponent implements OnInit {
 
-  @Output() productsChanged = new EventEmitter();
+  @Input() pathToNavigate: string;
 
   searchForm: FormGroup;
 
@@ -23,7 +22,7 @@ export class SearchComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private productService: ProductService,
+    private router: Router,
     private formBuilder: FormBuilder
   ) {
     this.searchForm = this.formBuilder.group({
@@ -41,13 +40,31 @@ export class SearchComponent implements OnInit {
   }
 
   onSearchSubmit() {
-    this.productService.search(
-      this.searchForm.get('keywords').value,
-      this.categoryIdToSearch
-    ).then((products: Product[]) => {
-      // Send the products to the parent component
-      this.productsChanged.emit(products);
-    });
+
+    const searchWord = this.searchForm.controls.keywords.value;
+
+    let queryParams = {};
+
+    if (this.categoryIdToSearch >= 0 && searchWord !== '') {
+      queryParams = {
+        categoryId: this.categoryIdToSearch,
+        searchWord: searchWord
+      };
+    }
+
+    if (this.categoryIdToSearch == -1 && searchWord !== '') {
+      queryParams = {
+        searchWord: searchWord
+      };
+    }
+
+    if (this.categoryIdToSearch >= 0 && searchWord === '') {
+      queryParams = {
+        categoryId: this.categoryIdToSearch
+      };
+    }
+
+    this.router.navigate([this.pathToNavigate], { queryParams: queryParams });
   }
 
 }

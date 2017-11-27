@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { ProductService } from '../../services/product/product.service';
 import { OrderService } from '../../services/order/order.service';
@@ -18,17 +18,44 @@ export class HomeComponent implements OnInit {
 
     products: Product[];
 
+    // Params from the Route.
+    currentPage: number;
+    searchWord: string;
+    categoryId: number;
+
     constructor(
         private productService: ProductService,
         private orderService: OrderService,
         private authService: AuthenticationService,
         private router: Router,
+        private route: ActivatedRoute,
         private flashMessages: FlashMessagesService
     ) { }
 
     ngOnInit() {
-        this.productService.getProducts()
-            .then(products => this.products = products);
+
+        this.route.queryParams.subscribe(params => {
+            if (params['page']) {
+                this.currentPage = +params['page'];
+            } else {
+                this.currentPage = 1;
+            }
+
+            if (params['searchWord']) {
+                this.searchWord = params['searchWord'];
+            } else {
+                this.searchWord = undefined;
+            }
+
+            if (params['categoryId']) {
+                this.categoryId = params['categoryId'];
+            } else {
+                this.categoryId = undefined;
+            }
+
+            this.productService.getProductsByParams(this.currentPage, this.categoryId, this.searchWord)
+                .then(products => this.products = products);
+        });
     };
 
     getSummaryTitle(title: string): string {
@@ -58,10 +85,6 @@ export class HomeComponent implements OnInit {
                 })
                 .catch(err => console.log(err));
         }
-    }
-
-    changeProductsList(products: Product[]) {
-        this.products = products;
     }
 
 }

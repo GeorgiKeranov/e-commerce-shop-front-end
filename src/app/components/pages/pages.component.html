@@ -1,0 +1,35 @@
+<div *ngIf="pagesCount > 0" class="row text-center">
+
+  <ul class="pagination">
+
+    <li class="disabled"><a>&laquo;</a></li>
+
+    <li *ngIf="currentPage - 3 > 0">
+      <a (click)="toPage(currentPage - 3)">{{ currentPage - 3 }}</a>
+    </li>
+    <li *ngIf="currentPage - 2 > 0">
+      <a (click)="toPage(currentPage - 2)">{{ currentPage - 2 }}</a>
+    </li>
+    <li *ngIf="currentPage - 1 > 0">
+      <a (click)="toPage(currentPage - 1)">{{ currentPage - 1 }}</a>
+    </li>
+
+    <li class="active">
+      <a>{{ currentPage }}</a>
+    </li>
+
+    <li *ngIf="currentPage + 1 <= pagesCount">
+      <a (click)="toPage(currentPage + 1)">{{ currentPage + 1 }}</a>
+    </li>
+
+    <li *ngIf="currentPage + 2 <= pagesCount">
+      <a (click)="toPage(currentPage + 2)">{{ currentPage + 2 }}</a>
+    </li>
+
+    <li *ngIf="currentPage + 3 <= pagesCount">
+      <a (click)="toPage(currentPage + 3)">{{ currentPage + 3 }}</a>
+    </li>
+
+    <li class="disabled"><a>&raquo;</a></li>
+  </ul>
+</div>
