@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
     };
 
     getSummaryTitle(title: string): string {
-        return title.length > 12 ? title.substring(0, 12) + '...' : title;
+        return title.length > 20 ? title.substring(0, 20) + '...' : title;
     }
 
     addToCart(productId: number) {

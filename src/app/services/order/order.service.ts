@@ -5,6 +5,7 @@ import { AuthenticationService } from '../authentication.service';
 import { Message } from '../../objects/message';
 import { OrderItem } from '../../objects/order-item';
 import { Order } from '../../objects/order';
+import { Product } from '../../objects/product';
 import { User } from '../../objects/user';
 
 const hostUrl = 'http://localhost:8080';
@@ -38,8 +39,23 @@ export class OrderService {
             orderItemsUrl,
             body,
             this.authService.getRequestOptions()
-        ).toPromise()
-            .then(resp => resp.json() as Message);
+        ).toPromise().then(resp => resp.json() as Message);
+    }
+
+    addProductWithQuantityToCart(productId: number, quantity: number): Promise<Message> {
+
+        const body = {
+            'product': {
+                'id': productId
+            },
+            'quantity': quantity
+        };
+
+        return this.http.post(
+            orderItemsUrl,
+            body,
+            this.authService.getRequestOptions()
+        ).toPromise().then(resp => resp.json() as Message);
     }
 
     getCartProductsCount(): Promise<Response> {

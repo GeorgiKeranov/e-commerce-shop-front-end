@@ -22,12 +22,15 @@ import { SentOrdersComponent } from './components/admin-panel/sent-orders/sent-o
 import { CompleteOrderComponent } from './components/admin-panel/complete-order/complete-order.component';
 import { CompletedOrdersComponent } from './components/admin-panel/completed-orders/completed-orders.component';
 import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-order/uncomplete-order.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent, canActivate: [NotAuthenticatedGuard] },
     { path: 'register', component: RegisterComponent, canActivate: [NotAuthenticatedGuard] },
     { path: 'account', component: AccountComponent, canActivate: [AuthenticatedGuard] },
+    { path: 'products/:id', component: ProductDetailsComponent },
+    { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthenticatedGuard] },
     {
         path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard], children: [
             { path: 'products/create', component: CreateProductComponent },
@@ -42,7 +45,6 @@ const routes: Routes = [
             { path: 'orders/completed/:id', component: UncompleteOrderComponent },
         ]
     },
-    { path: 'shopping-cart', component: ShoppingCartComponent },
     { path: 'page-not-found', component: PageNotFoundComponent },
     { path: '**', component: PageNotFoundComponent }
 ];

@@ -35,6 +35,7 @@ import { CompleteOrderComponent } from './components/admin-panel/complete-order/
 import { CompletedOrdersComponent } from './components/admin-panel/completed-orders/completed-orders.component';
 import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-order/uncomplete-order.component';
 import { PagesComponent } from './components/pages/pages.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { PagesComponent } from './components/pages/pages.component';
     CompleteOrderComponent,
     CompletedOrdersComponent,
     UncompleteOrderComponent,
-    PagesComponent
+    PagesComponent,
+    ProductDetailsComponent
   ],
   imports: [
     BrowserModule,
