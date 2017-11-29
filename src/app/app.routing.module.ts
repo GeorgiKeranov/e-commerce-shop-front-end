@@ -24,6 +24,7 @@ import { CompletedOrdersComponent } from './components/admin-panel/completed-ord
 import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-order/uncomplete-order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
+import { CategoryDetailsComponent } from './components/category-details/category-details.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -32,6 +33,7 @@ const routes: Routes = [
     { path: 'account', component: AccountComponent, canActivate: [AuthenticatedGuard] },
     { path: 'products/:id', component: ProductDetailsComponent },
     { path: 'catalog', component: CatalogComponent },
+    { path: 'catalog/:id', component: CategoryDetailsComponent },
     { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthenticatedGuard] },
     {
         path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard], children: [

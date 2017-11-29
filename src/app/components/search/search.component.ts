@@ -14,6 +14,7 @@ import { Category } from '../../objects/category';
 export class SearchComponent implements OnInit {
 
   @Input() pathToNavigate: string;
+  @Input() categoriesHide: boolean = false;
 
   searchForm: FormGroup;
 
@@ -31,8 +32,11 @@ export class SearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoryService.getCategories()
-      .then(categories => this.categories = categories);
+
+    if (!this.categoriesHide) {
+      this.categoryService.getCategories()
+        .then(categories => this.categories = categories);
+    }
   }
 
   onChange(categoryId) {
@@ -43,26 +47,10 @@ export class SearchComponent implements OnInit {
 
     const searchWord = this.searchForm.controls.keywords.value;
 
-    let queryParams = {};
-
-    if (this.categoryIdToSearch >= 0 && searchWord !== '') {
-      queryParams = {
-        categoryId: this.categoryIdToSearch,
-        searchWord: searchWord
-      };
-    }
-
-    if (this.categoryIdToSearch == -1 && searchWord !== '') {
-      queryParams = {
-        searchWord: searchWord
-      };
-    }
-
-    if (this.categoryIdToSearch >= 0 && searchWord === '') {
-      queryParams = {
-        categoryId: this.categoryIdToSearch
-      };
-    }
+    const queryParams = {
+      categoryId: this.categoryIdToSearch >= 0 ? this.categoryIdToSearch : undefined,
+      searchWord: searchWord !== '' ? searchWord : undefined
+    };
 
     this.router.navigate([this.pathToNavigate], { queryParams: queryParams });
   }

@@ -22,8 +22,9 @@ export class EditCategoriesComponent implements OnInit {
       .then((categories: Category[]) => this.categories = categories);
   }
 
-  onRemoveCategory(categoryId: number) {
-    console.log('delete category with id: ' + categoryId);
+  onRemoveCategory(index: number) {
+    this.categoryService.deleteCategoryById(this.categories[index].id)
+      .then(() => this.categories.splice(index, 1));
   }
 
 }

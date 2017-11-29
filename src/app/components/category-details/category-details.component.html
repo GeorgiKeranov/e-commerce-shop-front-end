@@ -1,0 +1,53 @@
+<div class="container">
+
+  <div class="row col-md-offset-4">
+    <app-search [pathToNavigate]="'/catalog/' + categoryId" [categoriesHide]="true"></app-search>
+  </div>
+  <hr>
+
+  <!-- change background color -->
+  <div class="row">
+    <div class="col-md-12">
+
+      <div *ngFor="let product of products" class="col-sm-6 col-md-4">
+        <div class="thumbnail border">
+
+          <img [src]="productService.getImageUrl(product.mainImageName)" class="img-responsive">
+
+          <div class="caption">
+            <div class="row">
+              <div class="col-md-7">
+                <h4><strong>{{ getSummaryTitle(product.title) }}</strong></h4>
+              </div>
+              <div class="col-md-5 price">
+                <h3>
+                  <label>${{ product.price }}</label></h3>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+
+                <a class="btn btn-primary btn-product" [routerLink]="'/products/' + product.id">
+                                    <span class="glyphicon glyphicon-list-alt"></span> Details
+                                </a>
+              </div>
+              <div class="col-md-6">
+                <!-- Add option for quantity -->
+                <a class="btn btn-success btn-product" (click)="addToCart(product.id)">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    Add to cart
+                                </a>
+              </div>
+            </div>
+
+            <p> </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-pages [pathToNavigate]="'/catalog/' + categoryId" [currentPage]="currentPage" [categoryId]="categoryId" [searchWord]="searchWord"
+      [categoryIdHide]="true"></app-pages>
+
+  </div>
+</div>

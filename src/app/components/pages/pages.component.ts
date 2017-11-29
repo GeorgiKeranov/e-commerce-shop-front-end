@@ -12,22 +12,16 @@ import { ProductService } from '../../services/product/product.service';
 export class PagesComponent implements OnInit {
 
   @Input() pathToNavigate: string;
-
   @Input() currentPage: number;
+  @Input() categoryIdHide = false;
   _categoryId: number;
   _searchWord: string;
-
   pagesCount: number;
 
   constructor(
     private productService: ProductService,
     private router: Router
   ) { }
-
-  ngOnInit() {
-    this.productService.getProductsCountWithParams(this._categoryId, this._searchWord)
-      .then(json => this.pagesCount = json['count']);
-  }
 
   @Input()
   set categoryId(categoryId: number) {
@@ -39,6 +33,11 @@ export class PagesComponent implements OnInit {
   set searchWord(searchWord: string) {
     this._searchWord = searchWord;
     this.ngOnInit();
+  }
+
+  ngOnInit() {
+    this.productService.getProductsCountWithParams(this._categoryId, this._searchWord)
+      .then(json => this.pagesCount = json['count']);
   }
 
   toPage(page: number) {
@@ -54,37 +53,11 @@ export class PagesComponent implements OnInit {
   }
 
   getQueryParams(page: number): object {
-    let params = {};
-
-    if (this._categoryId >= 0 && this._searchWord) {
-      params = {
-        categoryId: this._categoryId,
-        searchWord: this._searchWord,
-        page: page
-      };
-    }
-
-    if (!this._categoryId && this._searchWord) {
-      params = {
-        searchWord: this._searchWord,
-        page: page
-      };
-    }
-
-    if (this._categoryId >= 0 && !this._searchWord) {
-      params = {
-        categoryId: this._categoryId,
-        page: page
-      };
-    }
-
-    if (!this._categoryId && !this._searchWord) {
-      params = {
-        page: page
-      };
-    }
-
-    console.log(params);
+    const params = {
+      categoryId: this.categoryIdHide ? undefined : this._categoryId,
+      searchWord: this._searchWord,
+      page: page
+    };
 
     return params;
   }

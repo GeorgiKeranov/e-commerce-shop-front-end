@@ -19,7 +19,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let category of categories">
+              <tr *ngFor="let category of categories; let index = index">
                 <td>
                   <img [src]="categoryService.getImageUrl(category.imageName)" class="img-responsive" />
                 </td>
@@ -28,7 +28,7 @@
                 </td>
                 <td align="center">
                   <a [routerLink]="category.id" class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></a>
-                  <button class="btn btn-danger" (click)="onRemoveCategory(category.id)">
+                  <button class="btn btn-danger" (click)="onRemoveCategory(index)">
                     <span class="glyphicon glyphicon-remove"></span>
                   </button>
                 </td>

@@ -6,9 +6,10 @@ import { Message } from '../../objects/message';
 import { AuthenticationService } from '../authentication.service';
 
 const hostUrl = 'http://localhost:8080';
-const createCategoryUrl: string = hostUrl + '/admin/categories/create';
-const editCategoryUrl: string = hostUrl + '/admin/categories/update';
-const getCategoriesUrl: string = hostUrl + '/categories';
+const adminCategoriesUrl = hostUrl + '/admin/categories';
+const createCategoryUrl: string = adminCategoriesUrl + '/create';
+const editCategoryUrl: string = adminCategoriesUrl + '/update';
+const categoriesUrl: string = hostUrl + '/categories';
 
 @Injectable()
 export class CategoryService {
@@ -29,12 +30,12 @@ export class CategoryService {
     }
 
     getCategoryById(categoryId: number): Promise<Category> {
-        return this.http.get(getCategoriesUrl + '/' + categoryId).toPromise()
+        return this.http.get(categoriesUrl + '/' + categoryId).toPromise()
             .then(resp => resp.json() as Category);
     }
 
     getCategories(): Promise<Category[]> {
-        return this.http.get(getCategoriesUrl)
+        return this.http.get(categoriesUrl)
             .toPromise()
             .then((response: Response) => response.json() as Category[]);
     }
@@ -64,6 +65,11 @@ export class CategoryService {
 
         return this.http.post(editCategoryUrl, formData, this.authService.getRequestOptionsFormData())
             .toPromise().then(resp => resp.json() as Message);
+    }
+
+    deleteCategoryById(categoryId: number): Promise<Response> {
+        return this.http.delete(adminCategoriesUrl + '/' + categoryId, this.authService.getRequestOptions())
+            .toPromise();
     }
 
 }
