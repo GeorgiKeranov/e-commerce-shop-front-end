@@ -1,12 +1,31 @@
-<div class="col-md-5 col-md-offset-3 text-center">
-  <form [formGroup]="createCategoryForm" (submit)="onCreateCategorySubmit()">
-    <div class="form-group">
-      <label for="categoryName">Name of the category</label>
-      <input type="text" class="form-control" formControlName="categoryName" placeholder="Category name">
-    </div>
+<div class="row well">
+  <div class="col-md-5 col-md-offset-3 text-center">
+    <div class="row">
+      <img *ngIf="imageFakeUrl !== undefined" class="img-responsive" [src]="imageFakeUrl">
+      <img *ngIf="imageFakeUrl == undefined" class="img-responsive" src="//localhost:8080/res/images/default-image.png">
 
-    <div class="form-group">
-      <input type="submit" class="btn btn-primary" value="Create the category">
+      <div class="row top-buffer text-center">
+        <label class="btn btn-primary">
+            Browse image <input type="file" (change)="generateImageUrl($event)" hidden>
+          </label>
+
+        <button *ngIf="imageFakeUrl !== undefined" class="btn btn-danger" (click)="deleteImageUrl()">
+            Delete image
+          </button>
+      </div>
     </div>
-  </form>
+  </div>
+
+  <div class="col-md-5 col-md-offset-3 text-center top-buffer">
+    <form [formGroup]="createCategoryForm" (submit)="onCreateCategorySubmit()">
+      <div class="form-group">
+        <label for="categoryName">Name of the category</label>
+        <input type="text" class="form-control" formControlName="categoryName" placeholder="Category name">
+      </div>
+
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Create the category">
+      </div>
+    </form>
+  </div>
 </div>

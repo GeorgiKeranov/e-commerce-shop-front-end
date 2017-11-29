@@ -17,7 +17,6 @@ import { Message } from '../../../objects/message';
 export class EditProductComponent implements OnInit {
 
   productId: number;
-
   product: Product;
 
   productForm: FormGroup;

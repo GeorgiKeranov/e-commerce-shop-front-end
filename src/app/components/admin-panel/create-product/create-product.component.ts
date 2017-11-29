@@ -53,7 +53,6 @@ export class CreateProductComponent implements OnInit {
 
   onCategorySelected(categoryId) {
     this.categoryIdForProduct = categoryId;
-    console.log(categoryId);
   }
 
   generateImageUrl(event) {

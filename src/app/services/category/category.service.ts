@@ -18,6 +18,16 @@ export class CategoryService {
         private authService: AuthenticationService
     ) { }
 
+    getImageUrl(imageName: string): string {
+
+        let imageUrl = 'http://localhost:8080/res/images/';
+        if (imageName) {
+            return imageUrl = imageUrl + imageName;
+        } else {
+            return imageUrl = imageUrl + 'default-image.png';
+        }
+    }
+
     getCategoryById(categoryId: number): Promise<Category> {
         return this.http.get(getCategoriesUrl + '/' + categoryId).toPromise()
             .then(resp => resp.json() as Category);
@@ -29,24 +39,30 @@ export class CategoryService {
             .then((response: Response) => response.json() as Category[]);
     }
 
-    createCategory(categoryName: string): Promise<Message> {
+    createCategory(categoryName: string, image: File): Promise<Message> {
 
-        const params = {
-            'categoryName': categoryName
-        };
+        const formData = new FormData();
+        formData.append('categoryName', categoryName);
 
-        return this.http.post(createCategoryUrl, params, this.authService.getRequestOptions())
+        if (image) {
+            formData.append('image', image);
+        }
+
+        return this.http.post(createCategoryUrl, formData, this.authService.getRequestOptionsFormData())
             .toPromise().then(resp => resp.json() as Message);
     }
 
-    updateCategory(categoryName: string, categoryId: number): Promise<Message> {
+    updateCategory(categoryName: string, categoryId: number, image: File): Promise<Message> {
 
-        const params = {
-            id: categoryId,
-            categoryName: categoryName
-        };
+        const formData = new FormData();
+        formData.append('id', '' + categoryId);
+        formData.append('categoryName', categoryName);
 
-        return this.http.post(editCategoryUrl, params, this.authService.getRequestOptions())
+        if (image) {
+            formData.append('image', image);
+        }
+
+        return this.http.post(editCategoryUrl, formData, this.authService.getRequestOptionsFormData())
             .toPromise().then(resp => resp.json() as Message);
     }
 

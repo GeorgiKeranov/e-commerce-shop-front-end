@@ -15,6 +15,8 @@ import { Message } from '../../../objects/message';
 export class CreateCategoryComponent implements OnInit {
 
   createCategoryForm: FormGroup;
+  imageFakeUrl: string;
+  file: File;
 
   constructor(
     private router: Router,
@@ -30,11 +32,33 @@ export class CreateCategoryComponent implements OnInit {
   ngOnInit() {
   }
 
+  generateImageUrl(event) {
+
+    if (event.target.files && event.target.files[0]) {
+
+      this.file = event.target.files[0];
+
+      // Generate the fake url.
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imageFakeUrl = e.target.result;
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
+  deleteImageUrl() {
+    this.imageFakeUrl = undefined;
+    this.file = undefined;
+  }
+
   onCreateCategorySubmit() {
 
     const categoryName = this.createCategoryForm.get('categoryName').value;
 
-    this.categoryService.createCategory(categoryName)
+    this.categoryService.createCategory(categoryName, this.file)
       .then((msg: Message) => {
         this.router.navigate(['/admin']);
         this.flashMessagesService.show('Category was successful saved!', { cssClass: 'alert-success' });

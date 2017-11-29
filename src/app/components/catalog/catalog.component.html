@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <div *ngFor="let category of categories" class="col-xs-12 col-sm-6 col-md-3 team_columns_item_image">
+        <img [src]="categoryService.getImageUrl(category.imageName)" class="img-responsive">
+        <div class="team_columns_item_caption">
+          <hr>
+          <h5>{{ category.categoryName }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

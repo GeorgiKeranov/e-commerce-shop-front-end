@@ -3,11 +3,25 @@
     <div class="form-group">
       <h3>Category Name: <b>{{ categoryName }}</b></h3>
     </div>
-    <div class="form-group">
-      <input type="text" (input)="onInput($event.target.value)" class="form-control" placeholder="New name for the category">
+
+    <div class="row">
+      <img *ngIf="imageFakeUrl !== undefined" class="img-responsive" [src]="imageFakeUrl">
+      <img *ngIf="imageFakeUrl == undefined" class="img-responsive" src="//localhost:8080/res/images/default-image.png">
     </div>
-    <div class="form-group">
-      <input type="submit" class="btn btn-primary" value="Edit the category" [disabled]="categoryName == oldCategoryName || categoryName == ''">
+
+    <div class="row top-buffer text-center">
+      <label class="btn btn-primary">Browse image 
+        <input type="file" (change)="generateImageUrl($event)" hidden>
+      </label>
+    </div>
+
+    <div class="row top-buffer">
+      <div class="form-group">
+        <input type="text" (input)="onInput($event.target.value)" class="form-control" placeholder="New name for the category">
+      </div>
+      <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Edit the category" [disabled]="categoryName == oldCategoryName || categoryName == ''">
+      </div>
     </div>
   </form>
 </div>

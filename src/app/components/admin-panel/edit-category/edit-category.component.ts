@@ -17,6 +17,9 @@ export class EditCategoryComponent implements OnInit {
   oldCategoryName: string;
   categoryName: string;
 
+  file: File;
+  imageFakeUrl: string;
+
   editCategoryForm: FormGroup;
 
   constructor(
@@ -41,6 +44,23 @@ export class EditCategoryComponent implements OnInit {
     });
   }
 
+  generateImageUrl(event) {
+
+    if (event.target.files && event.target.files[0]) {
+
+      this.file = event.target.files[0];
+
+      // Generate the fake url.
+      const reader = new FileReader();
+
+      reader.onload = (e: any) => {
+        this.imageFakeUrl = e.target.result;
+      };
+
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  }
+
   onInput(newCategoryName: string) {
 
     // if newCategoryName is blank set the global categoryName to the old name.
@@ -52,7 +72,7 @@ export class EditCategoryComponent implements OnInit {
   }
 
   onEditCategorySubmit() {
-    this.categoryService.updateCategory(this.categoryName, this.categoryId)
+    this.categoryService.updateCategory(this.categoryName, this.categoryId, this.file)
       .then(resp => this.router.navigate(['/admin']))
       .catch(err => console.log(err));
   }

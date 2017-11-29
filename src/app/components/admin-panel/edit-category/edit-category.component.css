@@ -1,0 +1,18 @@
+.img-responsive
+{
+    max-width: 80%;
+    max-height: 80%;
+
+    border: 2px solid;
+    border-radius: 16px;
+
+    margin: 0 auto;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.top-buffer {
+    margin-top: 20px;
+}
