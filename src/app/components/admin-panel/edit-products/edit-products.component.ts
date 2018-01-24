@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Product } from '../../../objects/product';
 import { ProductService } from '../../../services/product/product.service';
@@ -12,19 +13,43 @@ import { ProductService } from '../../../services/product/product.service';
 export class EditProductsComponent implements OnInit {
 
   products: Product[];
-  errorMessage: string;
+
+  // Query Params from the route.
+  currentPage: number;
+  searchWord: string;
+  categoryId: number;
 
   constructor(
-    private productService: ProductService
+    private productService: ProductService,
+    private router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.productService.getProducts()
-      .then((products: Product[]) => this.products = products);
-  }
 
-  checkProductDetails(product: Product) {
-    console.log(product);
+    this.route.queryParams.subscribe(params => {
+      if (params['page']) {
+        this.currentPage = +params['page'];
+      } else {
+        this.currentPage = 1;
+      }
+
+      if (params['searchWord']) {
+        this.searchWord = params['searchWord'];
+      } else {
+        this.searchWord = undefined;
+      }
+
+      if (params['categoryId']) {
+        this.categoryId = params['categoryId'];
+      } else {
+        this.categoryId = undefined;
+      }
+
+      this.productService.getProductsByParams(this.currentPage, this.categoryId, this.searchWord)
+        .then(products => this.products = products);
+    });
+
   }
 
   addProductToDeleted(index: number) {
@@ -37,7 +62,7 @@ export class EditProductsComponent implements OnInit {
         this.products.splice(index, 1);
       })
       .catch(() => {
-        this.errorMessage = 'This product can\'t be deleted because it is used in orders';
+        // TODO Displaying error message in alert box.
       });
   }
 }

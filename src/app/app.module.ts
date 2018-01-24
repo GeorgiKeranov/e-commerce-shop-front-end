@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 // import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppRoutingModule } from './app.routing.module';
 import { LocalStorageModule } from 'angular-2-local-storage';
@@ -37,7 +38,8 @@ import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-or
 import { PagesComponent } from './components/pages/pages.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
-import { CategoryDetailsComponent } from './components/category-details/category-details.component';
+import { CategoryProductsComponent } from './components/category-products/category-products.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +66,8 @@ import { CategoryDetailsComponent } from './components/category-details/category
     PagesComponent,
     ProductDetailsComponent,
     CatalogComponent,
-    CategoryDetailsComponent
+    CategoryProductsComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +76,10 @@ import { CategoryDetailsComponent } from './components/category-details/category
     HttpModule,
     AppRoutingModule,
     LocalStorageModule,
-    FlashMessagesModule
+    FlashMessagesModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDEwOjyMwkxH7G151r7333157cD1e3NW5g'
+    })
   ],
   providers: [
     AuthenticationService,

@@ -9,12 +9,12 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { FlashMessagesService } from 'angular2-flash-messages';
 
 @Component({
-  selector: 'app-category-details',
-  templateUrl: './category-details.component.html',
-  styleUrls: ['./category-details.component.css'],
+  selector: 'app-category-products',
+  templateUrl: './category-products.component.html',
+  styleUrls: ['./category-products.component.css'],
   providers: [ProductService, OrderService]
 })
-export class CategoryDetailsComponent implements OnInit {
+export class CategoryProductsComponent implements OnInit {
 
   categoryId: number;
   searchWord: string;

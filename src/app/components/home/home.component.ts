@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
 
     products: Product[];
 
-    // Params from the Route.
+    // Query Params from the Route.
     currentPage: number;
     searchWord: string;
     categoryId: number;
@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
 
         this.route.queryParams.subscribe(params => {
+
             if (params['page']) {
                 this.currentPage = +params['page'];
             } else {

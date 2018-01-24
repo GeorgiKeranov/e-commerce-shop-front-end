@@ -24,7 +24,8 @@ import { CompletedOrdersComponent } from './components/admin-panel/completed-ord
 import { UncompleteOrderComponent } from './components/admin-panel/uncomplete-order/uncomplete-order.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
-import { CategoryDetailsComponent } from './components/category-details/category-details.component';
+import { CategoryProductsComponent } from './components/category-products/category-products.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -33,7 +34,7 @@ const routes: Routes = [
     { path: 'account', component: AccountComponent, canActivate: [AuthenticatedGuard] },
     { path: 'products/:id', component: ProductDetailsComponent },
     { path: 'catalog', component: CatalogComponent },
-    { path: 'catalog/:id', component: CategoryDetailsComponent },
+    { path: 'catalog/:id', component: CategoryProductsComponent },
     { path: 'shopping-cart', component: ShoppingCartComponent, canActivate: [AuthenticatedGuard] },
     {
         path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard], children: [
@@ -49,6 +50,7 @@ const routes: Routes = [
             { path: 'orders/completed/:id', component: UncompleteOrderComponent },
         ]
     },
+    { path: 'contacts', component: ContactsComponent },
     { path: 'page-not-found', component: PageNotFoundComponent },
     { path: '**', component: PageNotFoundComponent }
 ];

@@ -53,7 +53,7 @@ export class ProductService {
             url += 'searchWord=' + searchWord;
         }
 
-        return this.http.get(url, this.authService.getRequestOptions())
+        return this.http.get(url)
             .toPromise().then(resp => resp.json() as Product[]);
     }
 
@@ -106,7 +106,7 @@ export class ProductService {
             url += 'searchWord=' + searchWord;
         }
 
-        return this.http.get(url, this.authService.getRequestOptions())
+        return this.http.get(url)
             .toPromise().then(resp => resp.json());
     }
 }

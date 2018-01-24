@@ -25,14 +25,18 @@ export class PagesComponent implements OnInit {
 
   @Input()
   set categoryId(categoryId: number) {
-    this._categoryId = categoryId;
-    this.ngOnInit();
+    if (categoryId !== undefined) {
+      this._categoryId = categoryId;
+      this.ngOnInit();
+    }
   }
 
   @Input()
   set searchWord(searchWord: string) {
-    this._searchWord = searchWord;
-    this.ngOnInit();
+    if (searchWord !== undefined) {
+      this._searchWord = searchWord;
+      this.ngOnInit();
+    }
   }
 
   ngOnInit() {
@@ -42,14 +46,17 @@ export class PagesComponent implements OnInit {
 
   toPage(page: number) {
     this.router.navigate([this.pathToNavigate], { queryParams: this.getQueryParams(page) });
+    window.scrollTo(0, 0);
   }
 
   previousPage() {
     this.router.navigate([this.pathToNavigate], { queryParams: this.getQueryParams(this.currentPage - 1) });
+    window.scrollTo(0, 0);
   }
 
   nextPage() {
     this.router.navigate([this.pathToNavigate], { queryParams: this.getQueryParams(this.currentPage + 1) });
+    window.scrollTo(0, 0);
   }
 
   getQueryParams(page: number): object {
