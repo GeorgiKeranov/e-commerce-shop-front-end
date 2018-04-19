@@ -14,11 +14,10 @@ import { CategoryService } from '../../../services/category/category.service';
 export class EditCategoryComponent implements OnInit {
 
   categoryId: number;
-  oldCategoryName: string;
   categoryName: string;
 
   file: File;
-  imageFakeUrl: string;
+  imageSrc: string;
 
   editCategoryForm: FormGroup;
 
@@ -34,14 +33,22 @@ export class EditCategoryComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.route.params.subscribe(params => {
       this.categoryId = +params['id'];
 
       this.categoryService.getCategoryById(this.categoryId)
         .then((category: Category) => {
-          this.categoryName = this.oldCategoryName = category.categoryName;
+          this.categoryName = category.categoryName;
+
+          if (category.imageName == null) {
+            this.imageSrc = '//localhost:8080/res/images/default-image.png';
+          } else {
+            this.imageSrc = this.categoryService.getImageUrl(category.imageName);
+          }
         });
     });
+
   }
 
   generateImageUrl(event) {
@@ -54,20 +61,10 @@ export class EditCategoryComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = (e: any) => {
-        this.imageFakeUrl = e.target.result;
+        this.imageSrc = e.target.result;
       };
 
       reader.readAsDataURL(event.target.files[0]);
-    }
-  }
-
-  onInput(newCategoryName: string) {
-
-    // if newCategoryName is blank set the global categoryName to the old name.
-    if (newCategoryName === '' || newCategoryName === undefined) {
-      this.categoryName = this.oldCategoryName;
-    } else {
-      this.categoryName = newCategoryName;
     }
   }
 

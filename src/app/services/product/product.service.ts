@@ -78,10 +78,7 @@ export class ProductService {
     }
 
     getProductById(id: number): Promise<Product> {
-        return this.http.get(
-            productsUrl + '/' + id,
-            this.authService.getRequestOptions()
-        ).toPromise()
+        return this.http.get(productsUrl + '/' + id).toPromise()
             .then(resp => resp.json() as Product);
     }
 

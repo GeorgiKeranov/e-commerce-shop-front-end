@@ -7,11 +7,11 @@
 }
 .team_columns_item_image img {
     width: 100%;
-    -webkit-filter: grayscale(70%);
-    -moz-filter: grayscale(70%);
-    -ms-filter: grayscale(70%);
-    -o-filter: grayscale(70%);
-    filter: grayscale(70%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
     -webkit-transition: all ease-in-out .3s;
     -moz-transition: all ease-in-out .3s;
     -ms-transition: all ease-in-out .3s;

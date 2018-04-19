@@ -9,3 +9,7 @@
 .row {
     margin-bottom: 10px;
 }
+
+.line-breaker {
+  white-space: pre-wrap;
+}

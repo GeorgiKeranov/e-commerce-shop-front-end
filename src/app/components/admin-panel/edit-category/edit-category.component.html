@@ -1,23 +1,24 @@
 <div class="col-md-5 col-md-offset-3 text-center">
   <form [formGroup]="editCategoryForm" (submit)="onEditCategorySubmit()">
     <div class="form-group">
-      <h3>Category Name: <b>{{ categoryName }}</b></h3>
+      <h3>Category Name:
+        <b>{{ categoryName }}</b>
+      </h3>
     </div>
 
     <div class="row">
-      <img *ngIf="imageFakeUrl !== undefined" class="img-responsive" [src]="imageFakeUrl">
-      <img *ngIf="imageFakeUrl == undefined" class="img-responsive" src="//localhost:8080/res/images/default-image.png">
+      <img class="img-responsive" [src]="imageSrc">
     </div>
 
     <div class="row top-buffer text-center">
-      <label class="btn btn-primary">Browse image 
+      <label class="btn btn-primary">Browse image
         <input type="file" (change)="generateImageUrl($event)" hidden>
       </label>
     </div>
 
     <div class="row top-buffer">
       <div class="form-group">
-        <input type="text" (input)="onInput($event.target.value)" class="form-control" placeholder="New name for the category">
+        <input type="text" [value]="categoryName" (input)="categoryName = $event.target.value" class="form-control" placeholder="New name for the category">
       </div>
       <div class="form-group">
         <input type="submit" class="btn btn-primary" value="Edit the category" [disabled]="categoryName == oldCategoryName || categoryName == ''">
