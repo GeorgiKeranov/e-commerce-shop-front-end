@@ -1,28 +1,17 @@
-# ECommerceShop
+# E-Commerce Shop
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.1.
+## Description:
+Angular 2 project that uses REST service from E-Commerce Shop ( Back-End ).
 
-## Development server
+<br/>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+The shop have two type of users admins and normal users. Admins can create, edit or delete categories and products. They can check sent orders by users and to complete them. Users have shopping cart. They can search products by categories or by keywords and to order them.
 
-## Code scaffolding
+## Technologies used:
+Angular 2, Bootstrap 3, angular-2-local-storage, angular2-flash-messages, angular2-jwt, JSON.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
+## Pictures and Videos:
+### Pictures -> https://georgikeranov.com/project/E-Commerce%20Shop%20%28%20Front-end%20%29
+### Video -> https://www.youtube.com/watch?v=jfwO2zWHQKs
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
