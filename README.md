@@ -1,7 +1,7 @@
 # E-Commerce Shop
 
 ## Description:
-Angular 2 project that uses REST service from E-Commerce Shop ( Back-End ).
+Angular 2 project that uses REST service from [E-Commerce Shop ( Back-End )](https://github.com/GeorgiKeranov/E-Commerce-Shop-Back-End "Github link").
 
 <br/>
 
