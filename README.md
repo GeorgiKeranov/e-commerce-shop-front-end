@@ -11,7 +11,7 @@ The shop have two type of users admins and normal users. Admins can create, edit
 Angular 2, Bootstrap 3, angular-2-local-storage, angular2-flash-messages, angular2-jwt, JSON.
 
 ## Pictures and Video:
-### Pictures -> https://georgikeranov.com/project/E-Commerce%20Shop%20%28%20Front-end%20%29
+### Pictures -> https://georgikeranov.com/project/E-Commerce%20Shop%20%28Front-end%29
 ### Video -> https://www.youtube.com/watch?v=jfwO2zWHQKs
 
 
