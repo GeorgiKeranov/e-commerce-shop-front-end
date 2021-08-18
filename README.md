@@ -1,5 +1,5 @@
 # E-Commerce Shop Front End
-E-commerce shop front end created with Angular 2 that uses REST API from [E-Commerce Shop Back End](https://github.com/GeorgiKeranov/E-Commerce-Shop-Back-End).
+E-commerce shop front end created with Angular 2 that uses REST API from my other project [E-Commerce Shop Back End](https://github.com/GeorgiKeranov/E-Commerce-Shop-Back-End).
 
 ## Table of contents
 - [Technologies used](#technologies-used)
