@@ -20,7 +20,7 @@ E-commerce shop front end created with Angular 2 that uses REST API from my othe
 
 ## Functionalities
 
-The project has authentication system with JWT (Json Web Token).\
+The project has an authentication system with JWT (JSON Web Token).\
 Customers can register, login, add products to their cart and then purchase them.
 
 There are two roles for users:
